@@ -1,0 +1,31 @@
+{
+  "Grammar": {
+    "instructions": "Choose the correct answer from the given options in each question",
+    "questions": [
+      {
+        "question": "The opposite of strong is ___________________",
+        "options": ["weak", "weakest", "weaker", "strong"]
+      },
+      {
+        "question": "Which is the ________________mountain in Africa.",
+        "options": ["highest", "higher", "high", "more high"]
+      },
+      {
+        "question": "We wash our bodies ____________water and soap.",
+        "options": ["of", "without", "with", "and"]
+      },
+      {
+        "question": "That car is his. It belongs to _________________",
+        "options": ["he", "his", "him", "theirs"]
+      },
+      {
+        "question": "_______________sun rises from the East.",
+        "options": ["a", "an", "the", "on"]
+      },
+      {
+        "question": "Is there ______________money in your pocket?",
+        "options": ["some", "any", "much", "any"]
+      }
+    ]
+  }
+}
