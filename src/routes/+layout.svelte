@@ -1,5 +1,6 @@
 <script>
     import {onMount} from "svelte"
+    import TopBar from "$lib/topBar.svelte";
     import Drawer from "$lib/drawer.svelte";
     import Login from "$lib/login.svelte";
 
@@ -13,6 +14,7 @@
     })
 </script>
 {#if $username}
+    <TopBar/>
     <Drawer/>
     <slot/>
 {:else}

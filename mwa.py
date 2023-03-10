@@ -1,17 +1,11 @@
-import itertools
+import requests
 
-def increment_name():
-    for size in itertools.count(1):
-        for name in itertools.product('abcdefghijklmnopqrstuvwxyz', repeat=size):
-            yield ''.join(name)
+chating=True
 
-for name in increment_name():
-    if name==456976:
+while chating:
+    prompt = input("say something: ")
+    if prompt=="embe":
+        chating=False
         break 
-    print(name)
-
-# def increment_name():
-#     for size in itertools.count(.5):
-#         print("size",size)
-# increment_name()
-# print( itertools.count(1))
+    response=requests.get(f"http://localhost:5283?prompt={prompt}")
+    print(response.text)

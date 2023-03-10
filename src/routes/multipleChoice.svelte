@@ -38,7 +38,9 @@
         translation=response.explanation
       }
     })
-
+    socket.on("shuffle",_=>{
+        explaination=null
+    })
   });
 </script>
 

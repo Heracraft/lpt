@@ -41,6 +41,32 @@
     return array.length
   }
 
+  const pruneEval=(sections)=>{
+    let tempSections=[]
+    for (let section of sections){
+      let qns=section.questions
+      let temp=[]
+      let tempSection=section
+      for (let qn of qns){
+        let tempQn
+        if (qn.evaluation){
+          tempQn=new Object()
+          for(let key of Object.keys(qn)){
+            if(key!="evaluation"){
+              tempQn[key]=qn[key]
+            }
+          }
+        }
+        else{
+          tempQn=qn
+        }
+        temp.push(tempQn)
+      }
+      tempSection.questions=temp
+      tempSections.push(tempSection)
+    }
+    return tempSections
+  }
   const getKey=(question)=>{
     for (let key of Object.keys(question)){
       if(key !="answer" && key != "question"){
@@ -90,6 +116,9 @@
     for (let section of questions){
       if(section.selected){
         temp.push(section)
+      }
+      if (section.evaluation){
+          section.evaluation=undefined
       }
     }
     for (let section of questions){
@@ -221,23 +250,25 @@
     socket.on("explainComplete",response=>{
       if ( sections.indexOf(response.section) != -1){
         $explanations=$explanations.set(response.section,response.explanation)
-        console.log($explanations);
       }
     })
     socket.on("shuffle",newExam=>{
       let temp=$final
       console.log({newExam});
-      $explanations.clear()
       let newSections=[]
       for (let newSection of newExam){
         newSections.push(newSection)
       }
       newSections=sortSections(newSections)
+      newSections=pruneEval(newSections)
       temp.questions=newSections
       for (let section of temp.questions){
         sections.push(section.section)
       }
+      $explanations=new Map()
       $final=temp
+      console.log({explanations:$explanations});
+
       shuffling=false
 
     })
@@ -250,7 +281,6 @@
       <h1 class="!my-0">Exaaam</h1>
       <div class="flex items-center child:ml-2">
         <h6 class="mr-1">score:{score||0 }</h6>
-        <div class="bg-primary-100 hover:bg-primary-400 !text-neutral-700 rounded-full shadow hover:!text-white px-5 py-1">{$username}</div>
         <div class="lg:hidden  bg-primary-100 rounded-full p-2 fill-primary hover:bg-primary-400 hover:fill-white h-fit w-fit" on:click={()=>{
           resizeDrawer()
         }}>

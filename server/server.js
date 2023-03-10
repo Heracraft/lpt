@@ -17,7 +17,7 @@ const io = new Server(server,{
 });
 
 const api = new ChatGPTAPI({
-  apiKey: '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'
+  apiKey: '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'
 })
 
 let roomId="cobet"
